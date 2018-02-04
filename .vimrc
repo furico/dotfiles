@@ -22,6 +22,7 @@ filetype plugin indent on
 syntax enable
 set hidden
 set modelines=1
+set clipboard+=unnamed
 " }}}
 " Searching {{{
 set hlsearch
