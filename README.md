@@ -1,6 +1,6 @@
 # 設定方法
 
-macでのセットアップ方法。
+macでのセットアップ方法。
 
 ## Homebrew
 
@@ -37,7 +37,7 @@ $ brew install coreutils gnu-sed
 `~/.bash_profile` に `PATH` を設定する。
 
 * 後述の `bash-it` の設定よりも前に記述すること。
-* そしないと `ls` コマンドの色設定が上手く行われない。
+* そうしないと `ls` コマンドの色設定が上手く行われない。
 
 ```
 # coreutils
@@ -55,9 +55,9 @@ export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
 
 * https://github.com/Bash-it/bash-it
 
-## 設定ファイルをコピー
+## 設定ファイルをコピー
 
-このリポジトリをcloneして `setup.sh` を実行する。
+このリポジトリをcloneして `setup.sh` を実行する。
 
 * `bash-it` がインストールされていることを前提としているため、先に `bash-it` をインストールしておくこと。
 
@@ -65,7 +65,7 @@ export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
 
 ### export
 
-必要に応じて `~/.bash_profile` に入れる。 `~/.bash_profile` 自体はgitで管理しない。
+必要に応じて `~/.bash_profile` に入れる。 `~/.bash_profile` 自体はgitで管理しない。
 
 ### その他スクリプト
 
