@@ -1,18 +1,14 @@
 #!/bin/bash
-
-#
 # ホームディレクトリにシンボリックリンクを作成する
-#
 
-# ファイル
-ln -sf $(pwd)/.bashrc ${HOME}/.bashrc
-ln -sf $(pwd)/.vimrc ${HOME}/.vimrc
+cd $(dirname $0)
+base_dir=$(pwd)
 
-# ディレクトリ
-# if [ ! -e ${HOME}/.vim ]; then
-#   ln -sf $(pwd)/vim ${HOME}/.vim
-# fi
-# if [ ! -e ${HOME}/settings ]; then
-#   ln -sf $(pwd)/settings ${HOME}/settings
-# fi
-# ln -sf $(pwd)/bin ${HOME}
+# vim
+ln -sf ${base_dir}/vim/vimrc ${HOME}/.vimrc
+# tmux
+ln -sf ${base_dir}/tmux/tmux.conf ${HOME}/.tmux.conf
+# bash-it
+ls bash/bash_it/custom/*.bash \
+| xargs -I{} basename {} \
+| xargs -I{} ln -sf ${base_dir}/bash/bash_it/custom/{} ${HOME}/.bash_it/custom/{}
