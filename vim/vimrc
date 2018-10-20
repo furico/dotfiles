@@ -64,6 +64,7 @@ nnoremap <Tab> <C-w><C-w>
 nnoremap <S-Tab> <C-w>W
 nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <Leader>s :ScrapFile<CR>
+nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
 " }}}
 " AutoGroups {{{
 augroup vimrc
@@ -84,6 +85,20 @@ function! s:open_scrap_file()
   let l:filename = input('Scrap File: ', l:scrap_dir.strftime('/%Y-%m-%d-%H%M%S.'))
   if l:filename != ''
     execute 'edit ' . l:filename
+  endif
+endfunction
+
+" Save Scrap File
+command! -nargs=0 SaveScrapFile call s:save_scrap_file()
+function! s:save_scrap_file()
+  let l:scrap_dir = $HOME . '/.vim_scrap'. strftime('/%Y/%m')
+  if !isdirectory(l:scrap_dir)
+    call mkdir(l:scrap_dir, 'p')
+  endif
+
+  let l:filename = input('Save As: ', l:scrap_dir.strftime('/%Y-%m-%d-%H%M%S.'))
+  if l:filename != ''
+    execute 'write ' . l:filename
   endif
 endfunction
 "}}}
