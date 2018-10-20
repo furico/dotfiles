@@ -17,7 +17,6 @@ if has("vim_starting")
 endif
 " }}}
 " Basic {{{
-set nocompatible
 filetype plugin indent on
 syntax enable
 set hidden
@@ -52,8 +51,8 @@ set statusline=%r%w%f%m%=[%{&fileformat}][%{&fileencoding}]%y[%3p%%][%3l:%-3c]
 " }}}}
 " Colors {{{
 set t_Co=256
-colorscheme desert
-"colorscheme jellybeans
+"colorscheme desert
+colorscheme jellybeans
 " }}}
 " Keymaps {{{
 let mapleader = "\<Space>"
@@ -63,12 +62,34 @@ nnoremap <silent> <Leader>w :update<CR>
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <Tab> <C-w><C-w>
 nnoremap <S-Tab> <C-w>W
+nnoremap <silent> <C-n> :bn<CR>
+nnoremap <silent> <Leader>s :ScrapFile<CR>
 " }}}
 " AutoGroups {{{
 augroup vimrc
   autocmd!
+  " Run Current VimScript
   autocmd FileType vim nnoremap <buffer> <Leader>r :so%<CR>
 augroup END
+" }}}
+" Custom Command {{{
+" Open Scrap File
+command! -nargs=0 ScrapFile call s:open_scrap_file()
+function! s:open_scrap_file()
+  let l:scrap_dir = $HOME . '/.vim_scrap'. strftime('/%Y/%m')
+  if !isdirectory(l:scrap_dir)
+    call mkdir(l:scrap_dir, 'p')
+  endif
+
+  let l:filename = input('Scrap File: ', l:scrap_dir.strftime('/%Y-%m-%d-%H%M%S.'))
+  if l:filename != ''
+    execute 'edit ' . l:filename
+  endif
+endfunction
+"}}}
+" Plugin Settings{{{
+" ctrlp
+let g:ctrlp_cmd = 'CtrlPBuffer'
 " }}}
 
 " vim:foldmethod=marker
