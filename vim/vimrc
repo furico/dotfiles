@@ -1,24 +1,12 @@
 scriptencoding utf-8
-" Init {{{
-function! s:add_bundle_path()
-  let l:files = globpath(expand("~/.vim/bundle"), "*")
-  for path in split(l:files, "\n")
-    if isdirectory(path)
-      execute "set rtp+=".path
-    endif
-    let l:after = path . "/after"
-    if isdirectory(l:after)
-      execute "set rtp+=".l:after
-    endif
-  endfor
-endfunction
-if has("vim_starting")
-  call s:add_bundle_path()
-endif
+" Plugins {{{
+call plug#begin('~/.vim/plugged')
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'nanotech/jellybeans.vim'
+" Automatically executes filetype plugin indent on and syntax enable.
+call plug#end()
 " }}}
 " Basic {{{
-filetype plugin indent on
-syntax enable
 set hidden
 set modelines=1
 set clipboard+=unnamed
