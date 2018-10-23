@@ -10,6 +10,7 @@ call plug#end()
 set hidden
 set modelines=1
 set clipboard+=unnamed
+set belloff=all
 " }}}
 " Searching {{{
 set hlsearch
