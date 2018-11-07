@@ -51,6 +51,10 @@ nnoremap <silent> <Leader>w :update<CR>
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <Tab> <C-w><C-w>
 nnoremap <S-Tab> <C-w>W
+nnoremap <silent> j gj
+nnoremap <silent> gj j
+nnoremap <silent> k gk
+nnoremap <silent> gk k
 nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <Leader>s :ScrapFile<CR>
 nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
