@@ -48,6 +48,7 @@ let mapleader = "\<Space>"
 nnoremap Y y$
 noremap <CR> o<Esc>
 nnoremap <silent> <Leader>w :update<CR>
+nnoremap <silent> <Leader>n :enew<CR>
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 nnoremap <Tab> <C-w><C-w>
 nnoremap <S-Tab> <C-w>W
