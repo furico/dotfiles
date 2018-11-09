@@ -2,8 +2,8 @@ scriptencoding utf-8
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'nanotech/jellybeans.vim'
 " Automatically executes filetype plugin indent on and syntax enable.
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 " }}}
 " Basic {{{
@@ -40,8 +40,8 @@ set statusline=%r%w%f%m%=[%{&fileformat}][%{&fileencoding}]%y[%3p%%][%3l:%-3c]
 " }}}}
 " Colors {{{
 set t_Co=256
-"colorscheme desert
-colorscheme jellybeans
+set background=light
+colorscheme PaperColor
 " }}}
 " Keymaps {{{
 let mapleader = "\<Space>"
