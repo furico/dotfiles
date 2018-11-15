@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 " Automatically executes filetype plugin indent on and syntax enable.
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 " }}}
 " Basic {{{
@@ -36,8 +37,7 @@ set showcmd
 set list lcs=eol:$,tab:>-
 set laststatus=2
 set cmdheight=2
-set statusline=%r%w%f%m%=[%{&fileformat}][%{&fileencoding}]%y[%3p%%][%3l:%-3c]
-" }}}}
+" }}}
 " Colors {{{
 set t_Co=256
 set background=light
@@ -99,6 +99,8 @@ endfunction
 " Plugin Settings{{{
 " ctrlp
 let g:ctrlp_cmd = 'CtrlPBuffer'
+" lightline
+let g:lightline = {'colorscheme': 'PaperColor'}
 " }}}
 
 " vim:foldmethod=marker
