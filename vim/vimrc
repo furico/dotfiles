@@ -6,6 +6,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'itchyny/lightline.vim'
 Plug 'justinmk/vim-dirvish'
+Plug 'mhinz/vim-startify'
+
+" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+
 call plug#end()
 " }}}
 " Basic {{{
