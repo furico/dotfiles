@@ -1,10 +1,11 @@
 scriptencoding utf-8
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
 " Automatically executes filetype plugin indent on and syntax enable.
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'itchyny/lightline.vim'
+Plug 'justinmk/vim-dirvish'
 call plug#end()
 " }}}
 " Basic {{{
