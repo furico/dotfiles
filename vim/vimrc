@@ -75,12 +75,16 @@ nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <Leader>s :ScrapFile<CR>
 nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
 " }}}
-" AutoGroups {{{
-augroup vimrc
+" Auto Commands {{{
+augroup MyVimrc
   autocmd!
-  " Run Current VimScript
-  autocmd FileType vim nnoremap <buffer> <Leader>r :so%<CR>
+  autocmd FileType vim call s:setting_for_vim()
+  autocmd User jedi-vim call s:setting_for_jedi()
 augroup END
+
+function! s:setting_for_vim()
+  nnoremap <buffer> <Leader>r :so%<CR>
+endfunction
 " }}}
 " Custom Command {{{
 " Open Scrap File
@@ -125,8 +129,7 @@ let g:lightline = {
   \ }
 
 " jedi-vim
-autocmd! User jedi-vim call s:jedivim_hook() 
-function! s:jedivim_hook()
+function! s:setting_for_jedi()
   let g:jedi#force_py_version = 3
   let g:jedi#popup_on_dot = 0 " ドット(.) 入力時に自動で補完しない
   autocmd FileType python setlocal completeopt-=preview
