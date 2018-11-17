@@ -47,9 +47,14 @@ set showcmd
 set list lcs=eol:$,tab:>-
 set laststatus=2
 set cmdheight=2
+if has_key(g:plugs, 'lightline.vim')
+  set noshowmode
+endif
 " }}}
 " Colors {{{
-set t_Co=256
+if has('gui_running')
+  set t_Co=256
+endif
 set background=light
 colorscheme PaperColor
 " }}}
@@ -110,7 +115,16 @@ endfunction
 " ctrlp
 let g:ctrlp_cmd = 'CtrlPBuffer'
 " lightline
-let g:lightline = {'colorscheme': 'PaperColor'}
+let g:lightline = {
+  \ 'colorscheme': 'PaperColor',
+  \ 'active': {
+  \   'left': [['mode', 'paste'],
+  \            ['gitbranch', 'readonly', 'filename', 'modified']],
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+  \ }
 " }}}
 
 " vim:foldmethod=marker
