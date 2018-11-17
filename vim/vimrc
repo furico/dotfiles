@@ -75,6 +75,15 @@ nnoremap <silent> gk k
 nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <Leader>s :ScrapFile<CR>
 nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
+
+inoremap () ()<Left>
+inoremap {} {}<Left>
+inoremap [] []<Left>
+inoremap '' ''<Left>
+inoremap "" ""<Left>
+inoremap (<CR> (<CR>)<Esc><S-O>
+inoremap {<CR> {<CR>}<Esc><S-O>
+inoremap [<CR> [<CR>]<Esc><S-O>
 " }}}
 " Auto Commands {{{
 augroup MyVimrc
