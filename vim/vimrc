@@ -77,6 +77,7 @@ nnoremap <silent> <Leader>s :ScrapFile<CR>
 nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
 
 inoremap () ()<Left>
+inoremap ()<Tab> ()
 inoremap {} {}<Left>
 inoremap [] []<Left>
 inoremap '' ''<Left>
