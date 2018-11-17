@@ -150,5 +150,8 @@ function! s:setting_for_jedi()
   let g:jedi#force_py_version = 3
   let g:jedi#popup_on_dot = 0 " ドット(.) 入力時に自動で補完しない
 endfunction
+" fzf
+nnoremap <silent> ; :Buffers<CR>
+nnoremap <silent> <Leader>t :Files<CR>
 " }}}
 " vim:foldmethod=marker
