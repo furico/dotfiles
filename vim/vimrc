@@ -85,6 +85,8 @@ inoremap "" ""<Left>
 inoremap (<CR> (<CR>)<Esc><S-O>
 inoremap {<CR> {<CR>}<Esc><S-O>
 inoremap [<CR> [<CR>]<Esc><S-O>
+" 同じ行内の次の ' or " の後ろでインサートモードにする
+nnoremap <silent> <Tab> :<C-U>call search('[''"]', '', line('.'))<CR>a
 " }}}
 " Auto Commands {{{
 augroup MyVimrc
