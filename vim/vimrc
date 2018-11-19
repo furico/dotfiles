@@ -63,7 +63,7 @@ colorscheme PaperColor
 " Keymaps {{{
 let mapleader = "\<Space>"
 nnoremap Y y$
-"noremap <CR> o<Esc>
+noremap <C-CR> o<Esc>
 nnoremap <silent> <Leader>w :update<CR>
 nnoremap <silent> <Leader>n :enew<CR>
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
@@ -76,6 +76,8 @@ nnoremap <silent> gk k
 nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <Leader>s :ScrapFile<CR>
 nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
+nnoremap <silent> <Leader>d :bd<CR>
+nnoremap <silent> <Leader>dd :bd!<CR>
 
 inoremap () ()<Left>
 inoremap ()<Tab> ()
