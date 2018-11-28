@@ -79,12 +79,19 @@ nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
 nnoremap <silent> <Leader>d :bd<CR>
 nnoremap <silent> <Leader>dd :bd!<CR>
 
-inoremap () ()<Left>
-inoremap ()<Tab> ()
-inoremap {} {}<Left>
-inoremap [] []<Left>
-inoremap '' ''<Left>
-inoremap "" ""<Left>
+" 対になるものを自動入力
+inoremap ( ()<Left>
+inoremap () ()
+inoremap { {}<Left>
+inoremap {} {}
+inoremap [ []<Left>
+inoremap [] []
+inoremap ' ''<Left>
+inoremap '' ''
+inoremap " ""<Left>
+inoremap "" ""
+inoremap ` ``<Left>
+inoremap `` ``
 inoremap (<CR> (<CR>)<Esc><S-O>
 inoremap {<CR> {<CR>}<Esc><S-O>
 inoremap [<CR> [<CR>]<Esc><S-O>
