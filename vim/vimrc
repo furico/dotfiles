@@ -11,6 +11,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mileszs/ack.vim'
 
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -177,5 +178,10 @@ nnoremap <silent> ; :Buffers<CR>
 nnoremap <silent> <Leader>t :Files<CR>
 " fzf-mru
 nnoremap <silent> <Leader>p :FZFMru<CR>
+" ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+  nnoremap <Leader>a :Ack!<Space>
+endif
 " }}}
 " vim:foldmethod=marker
