@@ -96,9 +96,9 @@ inoremap `` ``
 inoremap (<CR> (<CR>)<Esc><S-O>
 inoremap {<CR> {<CR>}<Esc><S-O>
 inoremap [<CR> [<CR>]<Esc><S-O>
-" 同じ行内の次の ' or " or ] の後ろに移動してインサートモードにする
-nnoremap <silent> <Tab> :<C-U>call search('[''"\])]', '', line('.'))<CR>a
-inoremap <silent> <C-e> <Esc>:<C-U>call search('[''"\])]', '', line('.'))<CR>a
+" 同じ行内の次の ' or " or ] の後ろに移動してインサートモード
+" なければ行末に移動してインサートモード
+inoremap <silent> <C-e> <Esc>:EJump<CR>
 " }}}
 " Auto Commands {{{
 augroup MyVimrc
@@ -130,6 +130,10 @@ endfunction
 " Custom Command {{{
 " Open Scrap File
 command! -nargs=0 ScrapFile call s:open_scrap_file()
+" Smart Jump
+command! -nargs=0 EJump call s:e_jump()
+"}}}
+" Functions{{{
 function! s:open_scrap_file()
   let l:scrap_dir = $HOME . '/.vim_scrap'. strftime('/%Y/%m')
   if !isdirectory(l:scrap_dir)
@@ -153,6 +157,22 @@ function! s:save_scrap_file()
   let l:filename = input('Save As: ', l:scrap_dir.strftime('/%Y-%m-%d-%H%M%S.'))
   if l:filename != ''
     execute 'write ' . l:filename
+  endif
+endfunction
+
+function! s:startinsert_a()
+  " ノーマルモードの a 相当の制御
+  startinsert
+  call cursor(line('.'), col('.') + 1)
+endfunction
+
+function! s:e_jump()
+  " 現在行 ' or " or ] or ) があれば、そこに移動して a でインサートモード
+  " なければ A でインサートモード
+  if search('[''"\])]', '', line('.'))
+    call s:startinsert_a()
+  else
+    startinsert!
   endif
 endfunction
 "}}}
