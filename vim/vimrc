@@ -66,8 +66,6 @@ nnoremap <silent> k gk
 nnoremap <silent> gk k
 nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <C-p> :bp<CR>
-nnoremap <silent> <Leader>s :ScrapFile<CR>
-nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
 nnoremap <silent> <Leader>d :bd<CR>
 nnoremap <silent> <Leader>dd :bd!<CR>
 " }}}
