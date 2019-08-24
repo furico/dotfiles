@@ -1,25 +1,4 @@
 scriptencoding utf-8
-" Plugins {{{
-call plug#begin('~/.vim/plugged')
-" Automatically executes filetype plugin indent on and syntax enable.
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'itchyny/lightline.vim'
-Plug 'justinmk/vim-dirvish'
-Plug 'mhinz/vim-startify'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'pbogut/fzf-mru.vim'
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-commentary'
-
-" Git
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-call plug#end()
-" }}}
 " Basic {{{
 set hidden
 set modelines=1
@@ -46,20 +25,16 @@ set expandtab
 " UI {{{
 set number
 set showcmd
-"set cursorline
 set list lcs=eol:$,tab:>-
 set laststatus=2
 set cmdheight=2
-if has_key(g:plugs, 'lightline.vim')
-  set noshowmode
-endif
+set statusline=%r%w%f%m%=[%{&fileformat}][%{&fileencoding}]%y[%3p%%][%3l:%-3c]
 " }}}
 " Colors {{{
-if has('gui_running')
-  set t_Co=256
-endif
-set background=light
-colorscheme PaperColor
+" if has('gui_running')
+"   set t_Co=256
+" endif
+colorscheme desert
 " }}}
 " Keymaps {{{
 let mapleader = "\<Space>"
@@ -75,134 +50,20 @@ nnoremap <silent> gj j
 nnoremap <silent> k gk
 nnoremap <silent> gk k
 nnoremap <silent> <C-n> :bn<CR>
+nnoremap <silent> <C-p> :bp<CR>
 nnoremap <silent> <Leader>s :ScrapFile<CR>
 nnoremap <silent> <Leader>ss :SaveScrapFile<CR>
 nnoremap <silent> <Leader>d :bd<CR>
 nnoremap <silent> <Leader>dd :bd!<CR>
-
-" 対になるものを自動入力
-inoremap ( ()<Left>
-inoremap () ()
-inoremap { {}<Left>
-inoremap {} {}
-inoremap [ []<Left>
-inoremap [] []
-inoremap ' ''<Left>
-inoremap '' ''
-inoremap " ""<Left>
-inoremap "" ""
-inoremap ` ``<Left>
-inoremap `` ``
-inoremap (<CR> (<CR>)<Esc><S-O>
-inoremap {<CR> {<CR>}<Esc><S-O>
-inoremap [<CR> [<CR>]<Esc><S-O>
-" 同じ行内の次の ' or " or ] の後ろに移動してインサートモード
-" なければ行末に移動してインサートモード
-inoremap <silent> <C-e> <Esc>:EJump<CR>
 " }}}
 " Auto Commands {{{
 augroup MyVimrc
   autocmd!
   autocmd FileType vim call s:setting_for_vim()
-  autocmd FileType python call s:setting_for_python()
-  autocmd FileType go call s:setting_for_go()
-  autocmd User jedi-vim call s:setting_for_jedi()
 augroup END
 
 function! s:setting_for_vim()
   nnoremap <buffer> <Leader>r :so%<CR>
 endfunction
-
-function! s:setting_for_python()
-  " for jedi-vim
-  setlocal completeopt-=preview
-endfunction
-
-function! s:setting_for_go()
-  setlocal noexpandtab
-  setlocal tabstop=4
-  setlocal shiftwidth=4
-  " for vim-go
-  setlocal completeopt-=preview
-  inoremap <buffer> <C-Space> <C-x><C-o>
-endfunction
-" }}}
-" Custom Command {{{
-" Open Scrap File
-command! -nargs=0 ScrapFile call s:open_scrap_file()
-" Smart Jump
-command! -nargs=0 EJump call s:e_jump()
-"}}}
-" Functions{{{
-function! s:open_scrap_file()
-  let l:scrap_dir = $HOME . '/.vim_scrap'. strftime('/%Y/%m')
-  if !isdirectory(l:scrap_dir)
-    call mkdir(l:scrap_dir, 'p')
-  endif
-
-  let l:filename = input('Scrap File: ', l:scrap_dir.strftime('/%Y-%m-%d-%H%M%S.'))
-  if l:filename != ''
-    execute 'edit ' . l:filename
-  endif
-endfunction
-
-" Save Scrap File
-command! -nargs=0 SaveScrapFile call s:save_scrap_file()
-function! s:save_scrap_file()
-  let l:scrap_dir = $HOME . '/.vim_scrap'. strftime('/%Y/%m')
-  if !isdirectory(l:scrap_dir)
-    call mkdir(l:scrap_dir, 'p')
-  endif
-
-  let l:filename = input('Save As: ', l:scrap_dir.strftime('/%Y-%m-%d-%H%M%S.'))
-  if l:filename != ''
-    execute 'write ' . l:filename
-  endif
-endfunction
-
-function! s:startinsert_a()
-  " ノーマルモードの a 相当の制御
-  startinsert
-  call cursor(line('.'), col('.') + 1)
-endfunction
-
-function! s:e_jump()
-  " 現在行 ' or " or ] or ) があれば、そこに移動して a でインサートモード
-  " なければ A でインサートモード
-  if search('[''"\])]', '', line('.'))
-    call s:startinsert_a()
-  else
-    startinsert!
-  endif
-endfunction
-"}}}
-" Plugin Settings{{{
-" lightline
-let g:lightline = {
-  \ 'colorscheme': 'PaperColor',
-  \ 'active': {
-  \   'left': [['mode', 'paste'],
-  \            ['gitbranch', 'readonly', 'filename', 'modified']],
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
-  \ },
-  \ }
-
-" jedi-vim
-function! s:setting_for_jedi()
-  let g:jedi#force_py_version = 3
-  let g:jedi#popup_on_dot = 0 " ドット(.) 入力時に自動で補完しない
-endfunction
-" fzf
-nnoremap <silent> ; :Buffers<CR>
-nnoremap <silent> <Leader>t :Files<CR>
-" fzf-mru
-nnoremap <silent> <Leader>p :FZFMru<CR>
-" ack.vim
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-  nnoremap <Leader>a :Ack!<Space>
-endif
 " }}}
 " vim:foldmethod=marker
