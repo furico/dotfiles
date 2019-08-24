@@ -1,4 +1,21 @@
 scriptencoding utf-8
+" Init {{{
+function! s:add_bundle_path()
+  let l:files = globpath(expand("~/.vim/bundle"), "*")
+  for path in split(l:files, "\n")
+    if isdirectory(path)
+      execute "set rtp+=".path
+    endif
+    let l:after = path . "/after"
+    if isdirectory(l:after)
+      execute "set rtp+=".l:after
+    endif
+  endfor
+endfunction
+if has("vim_starting")
+  call s:add_bundle_path()
+endif
+" }}}
 " Basic {{{
 set hidden
 set modelines=1
@@ -31,10 +48,8 @@ set cmdheight=2
 set statusline=%r%w%f%m%=[%{&fileformat}][%{&fileencoding}]%y[%3p%%][%3l:%-3c]
 " }}}
 " Colors {{{
-" if has('gui_running')
-"   set t_Co=256
-" endif
-colorscheme desert
+set background=light
+colorscheme PaperColor
 " }}}
 " Keymaps {{{
 let mapleader = "\<Space>"
