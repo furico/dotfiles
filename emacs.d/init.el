@@ -18,3 +18,5 @@
   (set-frame-parameter nil 'alpha 90))
 
 (load-theme 'monokai t)
+
+(setq ring-bell-function 'ignore)
