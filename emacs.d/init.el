@@ -20,3 +20,9 @@
 (load-theme 'monokai t)
 
 (setq ring-bell-function 'ignore)
+
+(setq inhibit-startup-screen t)
+
+;; フォント設定
+(when (member "Ricty Diminished" (font-family-list))
+  (add-to-list 'default-frame-alist '(font . "Ricty Diminished-14")))
