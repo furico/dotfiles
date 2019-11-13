@@ -3,7 +3,8 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
 
 (unless (package-installed-p 'monokai-theme)
@@ -29,3 +30,7 @@
 ;; フォント設定
 (when (member "Ricty Diminished" (font-family-list))
   (add-to-list 'default-frame-alist '(font . "Ricty Diminished-14")))
+
+;; packages
+(use-package cider
+  :ensure t)
