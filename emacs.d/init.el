@@ -8,10 +8,13 @@
 
 (unless (package-installed-p 'monokai-theme)
   (package-install 'monokai-theme))
+(unless (package-installed-p 'markdown-mode)
+  (package-install 'markdown-mode))
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(show-paren-mode t)
 
 (when window-system
   (set-frame-size (selected-frame) 120 48)
