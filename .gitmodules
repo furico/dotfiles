@@ -4,3 +4,6 @@
 [submodule "vim/bundle/Zenburn"]
 	path = vim/bundle/Zenburn
 	url = https://github.com/jnurmine/Zenburn.git
+[submodule "vim/bundle/vim-monokai"]
+	path = vim/bundle/vim-monokai
+	url = https://github.com/sickill/vim-monokai.git
