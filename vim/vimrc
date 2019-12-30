@@ -28,11 +28,11 @@ set showcmd
 set list lcs=eol:$,tab:>-
 set laststatus=2
 set cmdheight=2
-set statusline=%r%w%f%m%=[%{&fileformat}][%{&fileencoding}]%y[%3p%%][%3l:%-3c]
+"set statusline=%r%w%f%m%=[%{&fileformat}][%{&fileencoding}]%y[%3p%%][%3l:%-3c]
 " }}}
 " Colors {{{
-set background=light
-colorscheme PaperColor
+set background=dark
+colorscheme zenburn
 " }}}
 " Keymaps {{{
 let mapleader = "\<Space>"
@@ -61,5 +61,11 @@ augroup END
 function! s:setting_for_vim()
   nnoremap <buffer> <Leader>r :so%<CR>
 endfunction
+" }}}
+" Packages {{{
+" lightline.vim
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }
 " }}}
 " vim:foldmethod=marker

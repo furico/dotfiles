@@ -7,3 +7,6 @@
 [submodule "vim/pack/mycolors/start/vim-monokai"]
 	path = vim/pack/mycolors/start/vim-monokai
 	url = https://github.com/sickill/vim-monokai.git
+[submodule "vim/pack/mypackages/start/lightline.vim"]
+	path = vim/pack/mypackages/start/lightline.vim
+	url = https://github.com/itchyny/lightline.vim.git
