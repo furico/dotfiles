@@ -1,9 +1,9 @@
-[submodule "vim/bundle/papercolor-theme"]
-	path = vim/bundle/papercolor-theme
+[submodule "vim/pack/mycolors/start/papercolor-theme"]
+	path = vim/pack/mycolors/start/papercolor-theme
 	url = https://github.com/NLKNguyen/papercolor-theme.git
-[submodule "vim/bundle/Zenburn"]
-	path = vim/bundle/Zenburn
+[submodule "vim/pack/mycolors/start/Zenburn"]
+	path = vim/pack/mycolors/start/Zenburn
 	url = https://github.com/jnurmine/Zenburn.git
-[submodule "vim/bundle/vim-monokai"]
-	path = vim/bundle/vim-monokai
+[submodule "vim/pack/mycolors/start/vim-monokai"]
+	path = vim/pack/mycolors/start/vim-monokai
 	url = https://github.com/sickill/vim-monokai.git
