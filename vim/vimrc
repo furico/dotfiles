@@ -64,10 +64,7 @@ endfunction
 " }}}
 " Packages {{{
 " lightline.vim
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ }
-
+let g:lightline = {'colorscheme': 'wombat'}
 " vim-dirvish
 let g:loaded_netrwPlugin = 1
 command! -nargs=? -complete=dir Explore Dirvish <args>
