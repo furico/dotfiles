@@ -12,6 +12,7 @@ function! PackagerInit() abort
   call packager#add('NLKNguyen/papercolor-theme')
   call packager#add('jnurmine/Zenburn')
   call packager#add('sickill/vim-monokai')
+  call packager#add('Yggdroot/indentLine')
 endfunction
 " }}}
 " Basic {{{
