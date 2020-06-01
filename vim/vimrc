@@ -13,6 +13,8 @@ function! PackagerInit() abort
   call packager#add('jnurmine/Zenburn')
   call packager#add('sickill/vim-monokai')
   call packager#add('Yggdroot/indentLine')
+  call packager#add('tpope/vim-fugitive')
+  call packager#add('airblade/vim-gitgutter')
 endfunction
 " }}}
 " Basic {{{
