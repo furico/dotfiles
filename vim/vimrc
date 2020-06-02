@@ -15,6 +15,7 @@ function! PackagerInit() abort
   call packager#add('Yggdroot/indentLine')
   call packager#add('tpope/vim-fugitive')
   call packager#add('airblade/vim-gitgutter')
+  call packager#add('neoclide/coc.nvim', {'branch': 'release'})
 endfunction
 " }}}
 " Basic {{{
@@ -27,6 +28,7 @@ set modelines=1
 set clipboard+=unnamed
 set belloff=all
 set ambiwidth=double
+set updatetime=100
 " }}}
 " Searching {{{
 set hlsearch
@@ -92,7 +94,19 @@ command! -bang PackagerUpdate call PackagerInit() | call packager#update({ 'forc
 command! PackagerClean call PackagerInit() | call packager#clean()
 command! PackagerStatus call PackagerInit() | call packager#status()
 " lightline.vim
-let g:lightline = {'colorscheme': 'wombat'}
+"let g:lightline = {'colorscheme': 'wombat'}
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 " vim-dirvish
 let g:loaded_netrwPlugin = 1
 command! -nargs=? -complete=dir Explore Dirvish <args>
