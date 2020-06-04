@@ -17,6 +17,7 @@ function! PackagerInit() abort
   call packager#add('airblade/vim-gitgutter')
   call packager#add('neoclide/coc.nvim', {'branch': 'release'})
   call packager#add('junegunn/fzf.vim')
+  call packager#add('Vimjas/vim-python-pep8-indent')
 endfunction
 " }}}
 " Basic {{{
