@@ -9,18 +9,30 @@ function! PackagerInit() abort
   call packager#add('kristijanhusak/vim-packager', { 'type': 'opt' })
   call packager#add('itchyny/lightline.vim')
   call packager#add('justinmk/vim-dirvish')
-  call packager#add('NLKNguyen/papercolor-theme')
-  call packager#add('jnurmine/Zenburn')
-  call packager#add('sickill/vim-monokai')
   call packager#add('Yggdroot/indentLine')
   call packager#add('tpope/vim-fugitive')
   call packager#add('airblade/vim-gitgutter')
-  call packager#add('neoclide/coc.nvim', {'branch': 'release'})
+  call packager#add('neoclide/coc.nvim', { 'branch': 'release' })
   call packager#add('junegunn/fzf.vim')
-  call packager#add('Vimjas/vim-python-pep8-indent')
   call packager#add('tpope/vim-commentary')
   call packager#add('majutsushi/tagbar', { 'on': 'TagbarToggle' })
+  call packager#add('tmhedberg/SimpylFold')
+
+  " python
+  call packager#add('Vimjas/vim-python-pep8-indent')
+  call packager#add('vim-python/python-syntax')
+
+  " colorscheme
+  call packager#add('jnurmine/Zenburn')
+  call packager#add('NLKNguyen/papercolor-theme')
+  call packager#add('crusoexia/vim-monokai')
+  call packager#add('mhartington/oceanic-next')
+  call packager#add('lifepillar/vim-solarized8')
+  call packager#add('challenger-deep-theme/vim', { 'as': 'challenger-deep' })
+  call packager#add('patstockwell/vim-monokai-tasty')
+  call packager#add('morhetz/gruvbox')
 endfunction
+
 " }}}
 " Basic {{{
 filetype plugin indent on
@@ -54,17 +66,28 @@ set expandtab
 " UI {{{
 set number
 set showcmd
-set list lcs=eol:$,tab:>-
+
+"set list lcs=eol:$,tab:>-
+set list
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+
 set laststatus=2
 set cmdheight=2
 if !has('gui_running')
   " ターミナル使用時にインサートモードでカーソル行の表示切り替え
   autocmd InsertEnter,InsertLeave * set cul!
 endif
+
+set foldlevel=2
 " }}}
 " Colors {{{
 set background=dark
-colorscheme zenburn
+" set background=light
+if (has("termguicolors"))
+  set termguicolors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
 " }}}
 " Keymaps {{{
 let mapleader = "\<Space>"
@@ -83,6 +106,8 @@ nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <C-p> :bp<CR>
 nnoremap <silent> <Leader>d :bd<CR>
 nnoremap <silent> <Leader>dd :bd!<CR>
+nnoremap <silent> <Leader>e :CocCommand explorer<CR>
+
 " }}}
 " Auto Commands {{{
 augroup MyVimrc
@@ -101,7 +126,6 @@ command! -bang PackagerUpdate call PackagerInit() | call packager#update({ 'forc
 command! PackagerClean call PackagerInit() | call packager#clean()
 command! PackagerStatus call PackagerInit() | call packager#status()
 " lightline.vim
-"let g:lightline = {'colorscheme': 'wombat'}
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -113,6 +137,8 @@ let g:lightline = {
       \   'cocstatus': 'coc#status'
       \ },
       \ }
+set guioptions-=e  " don't use gui tabline
+
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 " vim-dirvish
@@ -122,14 +148,16 @@ command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args
 command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 " fzf.vim
 set rtp+=/usr/local/opt/fzf
-nnoremap <silent> <Leader><Leader> :GFiles<CR>
-nnoremap <silent> <Leader><Enter>  :Buffers<CR>
+nnoremap <silent> <Leader><Leader> :Buffers<CR>
+nnoremap <silent> <Leader><Enter>  :GFiles<CR>
 nnoremap <silent> <Leader>h  :History<CR>
 nnoremap <silent> <Leader>l  :Lines<CR>
 nnoremap <silent> <Leader>t  :BTags<CR>
 nnoremap <silent> <Leader>m  :Marks<CR>
 
 " coc.nvim
+let g:coc_global_extensions = ['coc-python', 'coc-json', 'coc-explorer']
+
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -153,5 +181,18 @@ endfunction
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+
+" python-syntax
+let g:python_highlight_func_calls = 0
+let g:python_highlight_all = 1
 " }}}
+
+" Local Settings
+let s:vimrc_local = $HOME . "/.vimrc.local"
+if filereadable(s:vimrc_local)
+  exec "so " . s:vimrc_local
+else
+  colorscheme zenburn
+endif
+
 " vim:foldmethod=marker
