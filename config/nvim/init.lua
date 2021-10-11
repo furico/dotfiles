@@ -26,6 +26,7 @@ require 'paq' {
 -- OPTIONS
 ----------------------------------------
 g.mapleader = ' '
+opt.termguicolors = true
 opt.number = true
 opt.hidden = true
 opt.clipboard = 'unnamedplus'
