@@ -13,7 +13,6 @@ function! PackagerInit() abort
   call packager#add('tpope/vim-fugitive')
   call packager#add('airblade/vim-gitgutter')
   call packager#add('tpope/vim-commentary')
-  call packager#add('majutsushi/tagbar', { 'on': 'TagbarToggle' })
   call packager#add('tmhedberg/SimpylFold')
 
   " python
@@ -104,7 +103,6 @@ nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <C-p> :bp<CR>
 nnoremap <silent> <Leader>d :bd<CR>
 nnoremap <silent> <Leader>dd :bd!<CR>
-
 " }}}
 " Auto Commands {{{
 augroup MyVimrc
@@ -137,9 +135,6 @@ let g:loaded_netrwPlugin = 1
 command! -nargs=? -complete=dir Explore Dirvish <args>
 command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
 command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
-
-" Tagbar
-nmap <F8> :TagbarToggle<CR>
 
 " python-syntax
 let g:python_highlight_func_calls = 0
