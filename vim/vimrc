@@ -103,6 +103,7 @@ nnoremap <silent> <C-n> :bn<CR>
 nnoremap <silent> <C-p> :bp<CR>
 nnoremap <silent> <Leader>d :bd<CR>
 nnoremap <silent> <Leader>dd :bd!<CR>
+nnoremap <silent> <Leader>11 :qa!<CR>
 " }}}
 " Auto Commands {{{
 augroup MyVimrc
