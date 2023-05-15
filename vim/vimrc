@@ -28,6 +28,7 @@ function! PackagerInit() abort
   call packager#add('challenger-deep-theme/vim', { 'as': 'challenger-deep' })
   call packager#add('patstockwell/vim-monokai-tasty')
   call packager#add('morhetz/gruvbox')
+  call packager#add('nordtheme/vim')
 endfunction
 
 " }}}

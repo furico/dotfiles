@@ -15,17 +15,29 @@ end
 ----------------------------------------
 -- PLUGINS
 ----------------------------------------
-require 'paq' {
-	'savq/paq-nvim';                  -- Let Paq manage itself
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+require("lazy").setup({
 	'hoob3rt/lualine.nvim';
 	'rktjmp/lush.nvim';
-	'ellisonleao/gruvbox.nvim';
-}
+	'ellisonleao/gruvbox.nvim',
+})
 
 ----------------------------------------
 -- OPTIONS
 ----------------------------------------
-g.mapleader = ' '
 opt.termguicolors = true
 opt.number = true
 opt.hidden = true
@@ -33,6 +45,7 @@ opt.clipboard = 'unnamedplus'
 opt.swapfile = false
 opt.list = true
 opt.listchars = 'eol:$,tab:>-,trail:~,extends:>,precedes:<'
+opt.cmdheight = 2
 
 ----------------------------------------
 -- UI
