@@ -67,6 +67,7 @@ opt.swapfile = false
 opt.list = true
 opt.listchars = 'eol:$,tab:>-,trail:~,extends:>,precedes:<'
 opt.cmdheight = 2
+opt.ignorecase = true
 
 ----------------------------------------
 -- UI
@@ -79,6 +80,12 @@ require('lualine').setup()
 ----------------------------------------
 map('n', '<Leader>w', ':update<CR>')
 map('n', '<Esc><Esc>', ':nohlsearch<CR>')
+map('n', '<Esc><Esc>', ':nohlsearch<CR>')
+map('n', '<C-n>', ':bn<CR>')
+map('n', '<C-p>', ':bp<CR>')
+map('n', '<Leader>d', ':bd<CR>')
+map('n', '<Leader>dd', ':bd!<CR>')
+map('n', '<Leader>11', ':qa!<CR>')
 
 -- telescope
 local builtin = require('telescope.builtin')
@@ -86,6 +93,9 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+-- nvim-tree
+map('n', '<Leader>b', ':NvimTreeToggle<CR>')
 
 ----------------------------------------
 -- nvim-tree
