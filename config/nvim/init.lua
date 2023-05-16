@@ -68,6 +68,7 @@ opt.list = true
 opt.listchars = 'eol:$,tab:>-,trail:~,extends:>,precedes:<'
 opt.cmdheight = 2
 opt.ignorecase = true
+opt.ambiwidth = 'double'
 
 ----------------------------------------
 -- UI
