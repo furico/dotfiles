@@ -30,8 +30,8 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 require("lazy").setup({
-	'hoob3rt/lualine.nvim';
-	'rktjmp/lush.nvim';
+	'hoob3rt/lualine.nvim',
+	'rktjmp/lush.nvim',
 	'ellisonleao/gruvbox.nvim',
 	{
 		'nvim-telescope/telescope.nvim',
