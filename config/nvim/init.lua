@@ -38,16 +38,6 @@ require("lazy").setup({
 		tag = '0.1.1',
 		dependencies = { 'nvim-lua/plenary.nvim' },
 	},
-	-- {
-	-- 	"nvim-tree/nvim-tree.lua",
-	-- 	version = "*",
-	-- 	dependencies = {
-	-- 		"nvim-tree/nvim-web-devicons",
-	-- 	},
-	-- 	config = function()
-	-- 		require("nvim-tree").setup {}
-	-- 	end,
-	-- },
 	{
 		'lewis6991/gitsigns.nvim',
 		config = function()
@@ -60,6 +50,19 @@ require("lazy").setup({
 			require('Comment').setup()
 		end,
 	},
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		},
+		config = function()
+			-- Unless you are still migrating, remove the deprecated commands from v1.x
+			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+		end,
+	  },
 })
 
 ----------------------------------------
@@ -102,7 +105,8 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- nvim-tree
-map('n', '<Leader>b', ':NvimTreeToggle<CR>')
+map('n', '<Leader>bf', ':Neotree<CR>')
+map('n', '<Leader>bb', ':Neotree buffers<CR>')
 
 ----------------------------------------
 -- nvim-tree
