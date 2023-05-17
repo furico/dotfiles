@@ -38,20 +38,26 @@ require("lazy").setup({
 		tag = '0.1.1',
 		dependencies = { 'nvim-lua/plenary.nvim' },
 	},
-	{
-		"nvim-tree/nvim-tree.lua",
-		version = "*",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = function()
-			require("nvim-tree").setup {}
-		end,
-	},
+	-- {
+	-- 	"nvim-tree/nvim-tree.lua",
+	-- 	version = "*",
+	-- 	dependencies = {
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- 	config = function()
+	-- 		require("nvim-tree").setup {}
+	-- 	end,
+	-- },
 	{
 		'lewis6991/gitsigns.nvim',
 		config = function()
 			require('gitsigns').setup()
+		end,
+	},
+	{
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup()
 		end,
 	},
 })
@@ -68,7 +74,7 @@ opt.list = true
 opt.listchars = 'eol:$,tab:>-,trail:~,extends:>,precedes:<'
 opt.cmdheight = 2
 opt.ignorecase = true
-opt.ambiwidth = 'double'
+-- opt.ambiwidth = 'double'
 
 ----------------------------------------
 -- UI
