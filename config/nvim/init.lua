@@ -35,6 +35,9 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
+		config = function()
+			require('lualine').setup()
+		end,
 	},
 	'rktjmp/lush.nvim',
 	'ellisonleao/gruvbox.nvim',
@@ -75,6 +78,16 @@ require("lazy").setup({
 			local lspconfig = require('lspconfig')
 			lspconfig.gopls.setup{}
 			lspconfig.pyright.setup{}
+			lspconfig.lua_ls.setup{
+				settings = {
+					Lua = {
+						diagnostics = {
+							-- Get the language server to recognize the `vim` global
+							globals = {'vim'},
+						},
+					},
+				},
+			}
 			-- goimports
 			vim.api.nvim_create_autocmd('BufWritePre', {
 				pattern = '*.go',
@@ -114,7 +127,6 @@ opt.shiftwidth = 4
 -- UI
 ----------------------------------------
 cmd('colorscheme gruvbox')
-require('lualine').setup()
 
 ----------------------------------------
 -- KEYMAPS
