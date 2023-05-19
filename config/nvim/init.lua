@@ -30,7 +30,12 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 require("lazy").setup({
-	'hoob3rt/lualine.nvim',
+	{
+		'hoob3rt/lualine.nvim',
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
 	'rktjmp/lush.nvim',
 	'ellisonleao/gruvbox.nvim',
 	'sindrets/diffview.nvim',
@@ -69,6 +74,7 @@ require("lazy").setup({
 		config = function()
 			local lspconfig = require('lspconfig')
 			lspconfig.gopls.setup{}
+			lspconfig.pyright.setup{}
 			-- goimports
 			vim.api.nvim_create_autocmd('BufWritePre', {
 				pattern = '*.go',
@@ -116,8 +122,8 @@ require('lualine').setup()
 map('n', '<Leader>w', ':update<CR>')
 map('n', '<Esc><Esc>', ':nohlsearch<CR>')
 map('n', '<Esc><Esc>', ':nohlsearch<CR>')
-map('n', '<C-n>', ':bn<CR>')
-map('n', '<C-p>', ':bp<CR>')
+-- map('n', '<C-n>', ':bn<CR>')
+-- map('n', '<C-p>', ':bp<CR>')
 map('n', '<Leader>d', ':bd<CR>')
 map('n', '<Leader>dd', ':bd!<CR>')
 map('n', '<Leader>11', ':qa!<CR>')
@@ -159,9 +165,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
