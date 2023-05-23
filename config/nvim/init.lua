@@ -43,7 +43,6 @@ require("lazy").setup({
 		"ellisonleao/gruvbox.nvim",
 		priority = 1000
 	},
-	'sindrets/diffview.nvim',
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.1',
@@ -121,6 +120,23 @@ require("lazy").setup({
 	'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
 	'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
 	'L3MON4D3/LuaSnip', -- Snippets plugin
+	{
+		'TimUntersberger/neogit',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'sindrets/diffview.nvim',
+		},
+		config = function ()
+			require('neogit').setup {
+				integrations = {
+					diffview = true
+				},
+			}
+		end,
+		keys = {
+			{"<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit"},
+		},
+	}
 })
 
 ----------------------------------------
