@@ -39,7 +39,6 @@ require("lazy").setup({
 			require('lualine').setup()
 		end,
 	},
-	'rktjmp/lush.nvim',
 	{
 		"ellisonleao/gruvbox.nvim",
 		priority = 1000
