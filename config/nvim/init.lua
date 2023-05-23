@@ -136,7 +136,7 @@ require("lazy").setup({
 		keys = {
 			{"<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit"},
 		},
-	}
+	},
 })
 
 ----------------------------------------
