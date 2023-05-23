@@ -40,7 +40,10 @@ require("lazy").setup({
 		end,
 	},
 	'rktjmp/lush.nvim',
-	'ellisonleao/gruvbox.nvim',
+	{
+		"ellisonleao/gruvbox.nvim",
+		priority = 1000
+	},
 	'sindrets/diffview.nvim',
 	{
 		'nvim-telescope/telescope.nvim',
@@ -67,11 +70,23 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
 		},
+		keys = {
+			{"<leader>bb", "<cmd>Neotree toggle<cr>", desc = "NeoTree"},
+		},
 		config = function()
 			-- Unless you are still migrating, remove the deprecated commands from v1.x
 			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+			require('neo-tree').setup {
+				window = {
+					mappings = {
+						['e'] = function() vim.api.nvim_exec('Neotree focus filesystem left', true) end,
+						['b'] = function() vim.api.nvim_exec('Neotree focus buffers left', true) end,
+						['g'] = function() vim.api.nvim_exec('Neotree focus git_status left', true) end,
+					},
+				},
+			}
 		end,
-	  },
+	},
 	{
 		'neovim/nvim-lspconfig',
 		config = function()
@@ -97,7 +112,9 @@ require("lazy").setup({
 			})
 			vim.api.nvim_create_autocmd('BufWritePre', {
 				pattern = '*.go',
-				callback = vim.lsp.buf.formatting,
+				callback = function()
+					vim.lsp.buf.format()
+				end
 			})
 		end,
 	},
@@ -147,10 +164,6 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fc', builtin.commands, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-
--- nvim-tree
-map('n', '<Leader>bf', ':Neotree<CR>')
-map('n', '<Leader>bb', ':Neotree buffers<CR>')
 
 ----------------------------------------
 -- nvim-tree
