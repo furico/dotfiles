@@ -137,6 +137,10 @@ require("lazy").setup({
 			{"<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit"},
 		},
 	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+	},
 })
 
 ----------------------------------------
