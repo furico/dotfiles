@@ -141,6 +141,13 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 	},
+	{
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+		config = function()
+			require("mason").setup()
+		end,
+	},
 })
 
 ----------------------------------------
