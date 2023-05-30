@@ -156,6 +156,7 @@ require("lazy").setup {
       require("mason").setup()
     end,
   },
+  "hashivim/vim-terraform",
 }
 
 ----------------------------------------
