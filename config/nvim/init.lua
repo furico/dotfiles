@@ -38,7 +38,12 @@ require("lazy").setup {
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("lualine").setup()
+      require("lualine").setup {
+        tabline = {
+          lualine_a = { { "filename", path = 1 } },
+          lualine_z = { "tabs" },
+        },
+      }
     end,
   },
   {
