@@ -43,6 +43,7 @@ require("lazy").setup {
           lualine_a = { { "filename", path = 1 } },
           lualine_z = { "tabs" },
         },
+        extensions = { "neo-tree" },
       }
     end,
   },
