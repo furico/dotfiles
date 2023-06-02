@@ -179,6 +179,16 @@ require("lazy").setup {
       },
     },
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("indent_blankline").setup {
+        show_current_context = true,
+      }
+      vim.cmd [[highlight IndentBlanklineChar guifg=#665c54 gui=nocombine]]
+      vim.cmd [[highlight IndentBlanklineContextChar guifg=#d5c4a1 gui=nocombine]]
+    end,
+  },
 }
 
 ----------------------------------------
