@@ -104,7 +104,6 @@ require("lazy").setup {
     config = function()
       local lspconfig = require "lspconfig"
       lspconfig.gopls.setup {}
-      lspconfig.pyright.setup {}
       lspconfig.lua_ls.setup {
         settings = {
           Lua = {
