@@ -14,7 +14,7 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-local lsp_names = function()
+local function lsp_names()
   local clients = {}
   for _, client in ipairs(vim.lsp.get_active_clients { bufnr = 0 }) do
     table.insert(clients, client.name)
