@@ -61,7 +61,10 @@ require("lazy").setup {
           lualine_a = { { "filename", path = 1 } },
           lualine_z = { "tabs" },
         },
-        extensions = { "neo-tree" },
+        extensions = {
+          "neo-tree",
+          "symbols-outline",
+        },
       }
     end,
   },
@@ -204,6 +207,12 @@ require("lazy").setup {
       }
       vim.cmd [[highlight IndentBlanklineChar guifg=#665c54 gui=nocombine]]
       vim.cmd [[highlight IndentBlanklineContextChar guifg=#d5c4a1 gui=nocombine]]
+    end,
+  },
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      require("symbols-outline").setup()
     end,
   },
 }
