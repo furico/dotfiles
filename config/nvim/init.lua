@@ -215,6 +215,12 @@ require("lazy").setup {
       require("symbols-outline").setup()
     end,
   },
+  {
+    "dinhhuy258/git.nvim",
+    config = function ()
+      require('git').setup()
+    end
+  }
 }
 
 ----------------------------------------
