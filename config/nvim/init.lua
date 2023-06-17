@@ -98,7 +98,7 @@ require("lazy").setup {
       "MunifTanjim/nui.nvim",
     },
     keys = {
-      { "<leader>bb", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+      { "<leader>bb", "<cmd>NeoTreeRevealToggle<cr>", desc = "NeoTreeRevealToggle" },
     },
     config = function()
       -- Unless you are still migrating, remove the deprecated commands from v1.x
