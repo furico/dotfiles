@@ -2,36 +2,28 @@ scriptencoding utf-8
 set nocompatible
 
 " Plugins {{{
-" Load packager only when you need it
-function! PackagerInit() abort
-  packadd vim-packager
-  call packager#init()
-  call packager#add('kristijanhusak/vim-packager', { 'type': 'opt' })
-  call packager#add('itchyny/lightline.vim')
-  call packager#add('justinmk/vim-dirvish')
-  call packager#add('Yggdroot/indentLine')
-  call packager#add('tpope/vim-fugitive')
-  call packager#add('airblade/vim-gitgutter')
-  call packager#add('tpope/vim-commentary')
-  call packager#add('tmhedberg/SimpylFold')
+packadd minpac
+call minpac#init()
+call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  " python
-  call packager#add('Vimjas/vim-python-pep8-indent')
-  call packager#add('vim-python/python-syntax')
+call minpac#add('itchyny/lightline.vim')
+call minpac#add('justinmk/vim-dirvish')
+call minpac#add('Yggdroot/indentLine')
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('airblade/vim-gitgutter')
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tmhedberg/SimpylFold')
 
-  " colorscheme
-  call packager#add('jnurmine/Zenburn')
-  call packager#add('NLKNguyen/papercolor-theme')
-  call packager#add('crusoexia/vim-monokai')
-  call packager#add('mhartington/oceanic-next')
-  call packager#add('lifepillar/vim-solarized8')
-  call packager#add('challenger-deep-theme/vim', { 'as': 'challenger-deep' })
-  call packager#add('patstockwell/vim-monokai-tasty')
-  call packager#add('morhetz/gruvbox')
-  call packager#add('nordtheme/vim')
-endfunction
+" python
+call minpac#add('Vimjas/vim-python-pep8-indent')
+call minpac#add('vim-python/python-syntax')
 
+" colorscheme
+call minpac#add('jnurmine/Zenburn')
+call minpac#add('NLKNguyen/papercolor-theme')
+call minpac#add('morhetz/gruvbox')
 " }}}
+
 " Basic {{{
 filetype plugin indent on
 syntax on
