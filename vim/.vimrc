@@ -1,0 +1,150 @@
+scriptencoding utf-8
+set nocompatible
+
+" Plugins {{{
+function! PackInit() abort
+  packadd minpac
+  call minpac#init()
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+  call minpac#add('itchyny/lightline.vim')
+  call minpac#add('justinmk/vim-dirvish')
+  call minpac#add('Yggdroot/indentLine')
+  call minpac#add('tpope/vim-fugitive')
+  call minpac#add('airblade/vim-gitgutter')
+  call minpac#add('tpope/vim-commentary')
+  call minpac#add('tmhedberg/SimpylFold')
+
+  " python
+  call minpac#add('Vimjas/vim-python-pep8-indent')
+  call minpac#add('vim-python/python-syntax')
+
+  " colorscheme
+  call minpac#add('jnurmine/Zenburn')
+  call minpac#add('NLKNguyen/papercolor-theme')
+  call minpac#add('morhetz/gruvbox')
+endfunction
+" }}}
+
+" Basic {{{
+filetype plugin indent on
+syntax on
+
+set autoindent
+set hidden
+set modelines=1
+set clipboard+=unnamed
+set belloff=all
+set ambiwidth=double
+set updatetime=100
+" }}}
+" Searching {{{
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+" }}}
+" Backups {{{
+set nobackup
+set nowritebackup
+set noswapfile
+set noundofile
+" }}}
+" Spaces & Tabs {{{
+set shiftwidth=2
+set tabstop=2
+set expandtab
+" }}}
+" UI {{{
+set number
+set showcmd
+
+"set list lcs=eol:$,tab:>-
+set list
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+
+set laststatus=2
+set cmdheight=2
+if !has('gui_running')
+  " ターミナル使用時にインサートモードでカーソル行の表示切り替え
+  autocmd InsertEnter,InsertLeave * set cul!
+endif
+
+set foldlevel=2
+" }}}
+" Colors {{{
+set background=dark
+" set background=light
+if (has("termguicolors"))
+  set termguicolors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+" }}}
+" Keymaps {{{
+let mapleader = "\<Space>"
+nnoremap Y y$
+noremap <C-CR> o<Esc>
+nnoremap <silent> <Leader>w :update<CR>
+nnoremap <silent> <Leader>n :enew<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <Tab> <C-w><C-w>
+nnoremap <S-Tab> <C-w>W
+nnoremap <silent> j gj
+nnoremap <silent> gj j
+nnoremap <silent> k gk
+nnoremap <silent> gk k
+nnoremap <silent> <C-n> :bn<CR>
+nnoremap <silent> <C-p> :bp<CR>
+nnoremap <silent> <Leader>d :bd<CR>
+nnoremap <silent> <Leader>dd :bd!<CR>
+nnoremap <silent> <Leader>11 :qa!<CR>
+" }}}
+" Auto Commands {{{
+augroup MyVimrc
+  autocmd!
+  autocmd FileType vim call s:setting_for_vim()
+augroup END
+
+function! s:setting_for_vim()
+  nnoremap <buffer> <Leader>r :so%<CR>
+endfunction
+" }}}
+" Packages {{{
+command! PackUpdate call PackInit() | call minpac#update()
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus packadd minpac | call minpac#status()
+" lightline.vim
+let g:lightline = {
+      \ 'colorscheme': 'PaperColor',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ],
+      \ },
+      \ }
+set guioptions-=e  " don't use gui tabline
+
+" vim-dirvish
+let g:loaded_netrwPlugin = 1
+command! -nargs=? -complete=dir Explore Dirvish <args>
+command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+
+" python-syntax
+let g:python_highlight_func_calls = 0
+let g:python_highlight_all = 1
+" }}}
+
+" Local Settings
+let s:vimrc_local = $HOME . "/.vimrc.local"
+if filereadable(s:vimrc_local)
+  exec "so " . s:vimrc_local
+else
+  try
+    colorscheme zenburn
+  catch /E185/
+    colorscheme desert
+  endtry
+endif
+
+" vim:foldmethod=marker
