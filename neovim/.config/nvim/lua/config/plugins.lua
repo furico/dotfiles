@@ -16,6 +16,10 @@ vim.pack.add({
   -- 検証用 colorscheme。termguicolors（options.lua）と合わせて
   -- 「インストール → 起動時適用」を見た目で確認できる最小の実プラグイン。
   { src = gh("folke/tokyonight.nvim"), name = "tokyonight" },
+
+  -- 構文ハイライト・折りたたみ。main ブランチ（組み込み vim.treesitter に
+  -- 委譲する書き直し版）を使う。default が legacy master のため version を明示。
+  { src = gh("nvim-treesitter/nvim-treesitter"), version = "main" },
 })
 
 -- ── 初期化 ───────────────────────────────────────────────
@@ -31,3 +35,7 @@ local map = vim.keymap.set
 
 map("n", "<leader>pu", function() vim.pack.update() end, { desc = "プラグインを更新（確認バッファ）" })
 map("n", "<leader>ps", function() vim.pack.update(nil, { offline = true }) end, { desc = "プラグインの現状を確認（オフライン）" })
+
+-- ── プラグイン個別設定 ───────────────────────────────────
+-- 「レジストリに追加 + 専用 config モジュール」パターン。以降のプラグインも同様。
+require("config.treesitter")
