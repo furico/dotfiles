@@ -13,9 +13,9 @@ end
 
 -- ── プラグイン登録 ───────────────────────────────────────
 vim.pack.add({
-  -- 検証用 colorscheme。termguicolors（options.lua）と合わせて
-  -- 「インストール → 起動時適用」を見た目で確認できる最小の実プラグイン。
-  { src = gh("folke/tokyonight.nvim"), name = "tokyonight" },
+  -- colorscheme。catppuccin（mocha）。適用は ui.lua（lualine より前）で行う。
+  -- repo 名が nvim のため dir 名衝突を避けて name を明示する。
+  { src = gh("catppuccin/nvim"), name = "catppuccin" },
 
   -- 構文ハイライト・折りたたみ。main ブランチ（組み込み vim.treesitter に
   -- 委譲する書き直し版）を使う。default が legacy master のため version を明示。
@@ -30,14 +30,13 @@ vim.pack.add({
 
   -- 補完。タグにピンして prebuilt の fuzzy バイナリを得る（cargo 不要）。
   { src = gh("Saghen/blink.cmp"), version = vim.version.range("1") },
-})
 
--- ── 初期化 ───────────────────────────────────────────────
--- 未インストール（初回オフライン等）でも起動を壊さないよう pcall で保護する。
-local ok = pcall(vim.cmd.colorscheme, "tokyonight")
-if not ok then
-  vim.notify("colorscheme 'tokyonight' を適用できませんでした（未インストール？）", vim.log.levels.WARN)
-end
+  -- UI/QoL。いずれも純 Lua で build 不要、default ブランチ。
+  { src = gh("nvim-lualine/lualine.nvim") },
+  { src = gh("folke/which-key.nvim") },
+  { src = gh("lewis6991/gitsigns.nvim") },
+  { src = gh("lukas-reineke/indent-blankline.nvim") },
+})
 
 -- ── プラグイン管理 keymap（<leader>p 名前空間）───────────
 -- vim.pack 依存のため keymaps.lua ではなくここに置き capability を自己完結させる。
@@ -52,3 +51,6 @@ require("config.treesitter")
 -- 補完 → LSP の順。LSP 側が補完エンジンの capabilities を受け取るため先に補完を読む。
 require("config.completion")
 require("config.lsp")
+-- UI（colorscheme/statusline/インデント/which-key）→ git（gitsigns）。
+require("config.ui")
+require("config.git")
