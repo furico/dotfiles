@@ -20,6 +20,16 @@ vim.pack.add({
   -- 構文ハイライト・折りたたみ。main ブランチ（組み込み vim.treesitter に
   -- 委譲する書き直し版）を使う。default が legacy master のため version を明示。
   { src = gh("nvim-treesitter/nvim-treesitter"), version = "main" },
+
+  -- LSP。組み込み vim.lsp を土台に、サーバ調達を mason に任せる。
+  -- nvim-lspconfig は lsp/*.lua 設定データ供給源、mason-lspconfig は橋渡し +
+  -- automatic_enable による vim.lsp.enable を担う。
+  { src = gh("mason-org/mason.nvim") },
+  { src = gh("neovim/nvim-lspconfig") },
+  { src = gh("mason-org/mason-lspconfig.nvim") },
+
+  -- 補完。タグにピンして prebuilt の fuzzy バイナリを得る（cargo 不要）。
+  { src = gh("Saghen/blink.cmp"), version = vim.version.range("1") },
 })
 
 -- ── 初期化 ───────────────────────────────────────────────
@@ -39,3 +49,6 @@ map("n", "<leader>ps", function() vim.pack.update(nil, { offline = true }) end, 
 -- ── プラグイン個別設定 ───────────────────────────────────
 -- 「レジストリに追加 + 専用 config モジュール」パターン。以降のプラグインも同様。
 require("config.treesitter")
+-- 補完 → LSP の順。LSP 側が補完エンジンの capabilities を受け取るため先に補完を読む。
+require("config.completion")
+require("config.lsp")
