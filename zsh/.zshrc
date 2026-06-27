@@ -100,5 +100,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# XON/XOFF フロー制御を無効化。C-s（出力停止）と C-q（再開）を解放する。
+# tmux 内では tmux が C-q を prefix として奪うため本設定は不要だが、
+# tmux 外のシェルで C-q を使いたい場合（readline の quoted-insert など）に必要。
+stty -ixon
+
 # Machine-specific settings (not tracked in dotfiles)
 [ -f "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
