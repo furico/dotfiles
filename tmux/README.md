@@ -54,10 +54,10 @@ stow -n tmux   # ドライラン（衝突確認）
 stow tmux      # ~/.config/tmux/ 配下にリンクを作成
 stow -D tmux   # 取り消し
 
-# 3) tmux を起動
+# 3) tmux を起動し、prefix + I でプラグインを取得
 tmux
-#   現状 TPM が管理する追加プラグインは無いが、将来プラグインを宣言したら
-#   tmux 内で prefix + I（= C-q → Shift+i）を押すと取得できる。
+# tmux 内で prefix + I（= C-q → Shift+i）を押すと catppuccin/tmux がインストールされる。
+# インストール後、prefix + r でリロードするとテーマが適用される。
 ```
 
 `project-layout.sh` をシェルから呼びやすくする場合は、zsh パッケージ側で
@@ -65,8 +65,20 @@ tmux
 
 ## 採用プラグイン
 
-- `tmux-plugins/tpm` … プラグインマネージャ。現状 TPM が管理する追加プラグインは無く、
-  将来テーマ等を入れるための足場として置いている。
+- `tmux-plugins/tpm` … プラグインマネージャ。`prefix + I` でプラグインを取得する。
+- `catppuccin/tmux` … catppuccin-mocha テーマ。Neovim のカラースキームと統一。
+
+### 導入手順（新規マシン）
+
+```sh
+# 1) TPM をクローン（プラグインは stow 管理の外に置く）
+git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
+
+# 2) tmux を起動し、prefix + I（= C-q → Shift+i）でプラグインを取得
+#    catppuccin/tmux が ~/.local/share/tmux/plugins/catppuccin-tmux/ にインストールされる
+
+# 3) prefix + r で設定をリロード（またはセッションを再起動）するとテーマが適用される
+```
 
 ### 意図的に入れていないもの
 
@@ -74,10 +86,10 @@ tmux
   （Claude Code の `C-j`=改行）・シェルの readline・nvim 挿入モードの Ctrl を奪うため不採用。
   ペイン移動は `prefix + hjkl` で行う。シームレスが欲しくなった場合は Alt+hjkl 方式
   （ghostty の `macos-option-as-alt` が前提）へ切り替え可能。
-- **配色テーマ** … Neovim のカラースキームが未定のため保留。確定後に系統を揃える。
 - **tmux-yank** … `set-clipboard on`（OSC 52）で代替可能。マウスドラッグコピーの体感次第で後日判断。
 - **tmux-resurrect / continuum**（セッション永続化）… AI エージェントはプロセス状態まで
   復元できず、レイアウト復元の価値が限定的なため見送り。
+- **tmux-cpu / tmux-battery**（システム情報）… ステータスバーはシンプルに保つ。必要なら独立した変更で追加する。
 
 ## 次のタスク
 

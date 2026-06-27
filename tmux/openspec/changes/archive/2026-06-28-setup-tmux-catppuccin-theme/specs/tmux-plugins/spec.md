@@ -1,21 +1,4 @@
-# tmux-plugins Specification
-
-## Purpose
-
-tmux のプラグイン管理方針を定義する。TPM でプラグインを管理し、採用・不採用の理由を明示する。
-
-## Requirements
-
-### Requirement: TPM によるプラグイン管理
-tmux は TPM（tmux plugin manager）でプラグインを管理する SHALL。`tmux.conf` にプラグイン宣言と TPM の初期化行を含め、TPM のインストール手順を README に記載する SHALL。
-
-#### Scenario: プラグインを取得できる
-- **WHEN** TPM をクローン済みの状態で `prefix + I` を実行する
-- **THEN** `tmux.conf` で宣言したプラグインがインストールされ有効になる
-
-#### Scenario: クリーンな環境での導入手順
-- **WHEN** 新しいマシンで README の手順に従い TPM をクローンして tmux を起動する
-- **THEN** プラグイン取得の前提（TPM の配置）が満たされ、`prefix + I` で導入が完了する
+## MODIFIED Requirements
 
 ### Requirement: 見送るプラグインの方針
 本構成では `catppuccin/tmux` のみを追加プラグインとして採用する SHALL。以下はいずれも入れない: シームレス移動（`vim-tmux-navigator`）、永続化（`tmux-resurrect`/`tmux-continuum`）、`tmux-yank`、システム情報（`tmux-cpu`/`tmux-battery`）。理由を README もしくは設定コメントに残す。
