@@ -1,0 +1,53 @@
+# Ghostty 設定。`stow ghostty` で ~/.config/ghostty/config にリンクされる。
+# 値の確認は `ghostty +show-config`、検証は `ghostty +validate-config`。
+# テーマ一覧は `ghostty +list-themes`、フォント一覧は `ghostty +list-fonts`。
+
+# ── テーマ（catppuccin-mocha）──────────────────────────────────────────────
+# Neovim / tmux と同じ Catppuccin Mocha に統一。
+# 値はテーマファイル名そのまま（スペース込み・大文字）で指定する点に注意。
+# latte / frappe / macchiato に切り替えたい場合はここを変えるだけ。
+theme = Catppuccin Mocha
+
+# ── フォント────────────────────────────────────────────────────────────────
+# JetBrainsMono Nerd Font（アイコン付き）。Mono 判定外のため +list-fonts には
+# 出ないが font-family 指定で解決される（`ghostty +show-face` で確認可）。
+# 和文は OS のフォントフォールバックに任せる。
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+
+# リガチャ（=> != >= など）は Ghostty 既定で有効。
+# 見た目と実際の文字を一致させたい場合は次行を有効化してオフにする:
+# font-feature = -calt, -liga, -dlig
+
+# ── 外観（半透明）──────────────────────────────────────────────────────────
+# わずかに透過させる。背景ブラーは試した結果オフの方が好みだったため無効。
+# すりガラス風にしたい場合は次行を有効化する（数値はぼかし半径）:
+# background-blur = 20
+background-opacity = 0.90
+
+# タイトルバーを背景になじませる（透過と相性が良い）。
+macos-titlebar-style = transparent
+
+# ウィンドウ内側の余白。上下左右を均等化。
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+
+# ── カーソル・入力────────────────────────────────────────────────────────
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true
+
+# 選択した瞬間にクリップボードへコピー（中クリック/Cmd-V で貼り付け）。
+copy-on-select = clipboard
+
+# Option は macOS の文字入力（Option+¥ = \ など）をそのまま使うため Alt 化しない。
+# JIS キーボードには右 Option が無いため left/right の使い分けはできない。
+# Meta 系キーを Option で使いたい場合は true にするが、その場合 Option での
+# 文字入力（\ など）は効かなくなる:
+# macos-option-as-alt = true
+
+# ── 分割・タブ（tmux に委譲）──────────────────────────────────────────────
+# ペイン分割・セッション管理は tmux 側で行うため、Ghostty 側は最小構成。
+# 既定のウィンドウ/タブ操作（super+t / super+n / super+w 等）はそのまま利用する。
+# キーバインド一覧: `ghostty +list-keybinds`
