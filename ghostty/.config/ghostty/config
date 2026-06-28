@@ -23,7 +23,7 @@ font-size = 14
 # わずかに透過させる。背景ブラーは試した結果オフの方が好みだったため無効。
 # すりガラス風にしたい場合は次行を有効化する（数値はぼかし半径）:
 # background-blur = 20
-background-opacity = 0.90
+background-opacity = 0.70
 
 # タイトルバーを背景になじませる（透過と相性が良い）。
 macos-titlebar-style = transparent
