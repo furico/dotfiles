@@ -14,9 +14,9 @@ end
 
 snacks.setup({
   -- fuzzy finder。キーマップは finder.lua（<leader>f 名前空間）。
-  picker = { enabled = true },
+  picker = { enabled = true, hidden = true },
   -- ファイラ。キーマップは explorer.lua（<leader>e/<leader>E）。
   -- explorer は picker の上に構築され、replace_netrw=true・trash=true や
   -- tree/git_status/diagnostics/follow_file/sidebar レイアウトなどの既定をそのまま採用する。
-  explorer = { enabled = true },
+  explorer = { enabled = true, hidden = true },
 })
