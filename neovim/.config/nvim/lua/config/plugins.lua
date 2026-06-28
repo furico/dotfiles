@@ -58,5 +58,9 @@ require("config.lsp")
 -- UI（colorscheme/statusline/インデント/which-key）→ git（gitsigns）。
 require("config.ui")
 require("config.git")
--- fuzzy finder（snacks.picker）。<leader>f グループ名は ui.lua 側で登録済み。
+-- snacks（中央 setup）→ finder（picker keymap）→ explorer（explorer keymap）の順。
+-- setup を snacks.lua に集約し、各 capability はキーマップだけを足す。
+-- <leader>f グループ名は ui.lua 側で登録済み。<leader>e/<leader>E は単独キーで登録不要。
+require("config.snacks")
 require("config.finder")
+require("config.explorer")
