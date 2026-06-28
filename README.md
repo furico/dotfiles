@@ -18,25 +18,57 @@ dotfiles/
 
 ## Prerequisites
 
-```sh
-brew install stow
-```
+[Homebrew](https://brew.sh/) が必要。`stow` を含む CLI ツールは後述の `Brewfile` で一括導入する。
 
 ## セットアップ
 
+新しいマシンでの再現手順。
+
 ```sh
-git clone https://github.com/furihatah/dotfiles.git ~/dotfiles
+# 1. リポジトリを取得
+git clone https://github.com/furico/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
-# 管理したいパッケージを個別に stow する
-stow vim
+# 2. 依存 CLI ツールを一括インストール（stow 含む）
+brew bundle install --file=~/dotfiles/Brewfile
+
+# 3. 管理したいパッケージを個別に stow する
+stow zsh neovim tmux vim ghostty
 ```
+
+### Brewfile
+
+リポジトリ直下の `Brewfile` に、この dotfiles が依存する CLI ツールだけを厳選して記載している（無関係なツールは含めない）。stow のパッケージではないため symlink されず、`--file` で明示的に指す。
+
+```sh
+brew bundle install --file=~/dotfiles/Brewfile   # 一括インストール
+brew bundle check   --file=~/dotfiles/Brewfile   # 不足の確認（変更なし）
+```
+
+### Homebrew 管轄外のセットアップ
+
+`Brewfile` では入らないもの。stow 後に手動で実施する。
+
+```sh
+# oh-my-zsh（zsh/.zshrc が前提）
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# TPM（tmux プラグイン管理）。clone 後、tmux 内で prefix + I を実行して取得する
+git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
+```
+
+- **ghostty** … 端末エミュレータ。手動インストール（cask 管理しない）。
+- **LSP サーバ** … Neovim 初回起動時に mason が自動導入する。
 
 ## 管理中のパッケージ
 
 | パッケージ | 対象ファイル |
 | --- | --- |
+| `zsh` | `~/.zshrc` |
+| `neovim` | `~/.config/nvim/` |
+| `tmux` | `~/.config/tmux/` |
 | `vim` | `~/.vimrc` |
+| `ghostty` | `~/.config/ghostty/config` |
 
 ## 新しいアプリを追加する
 
