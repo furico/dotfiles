@@ -40,6 +40,11 @@ vim.pack.add({
   -- fuzzy finder。snacks の picker モジュールのみを finder.lua で有効化する。
   -- 純 Lua・build 不要・外部バイナリ不要（rg/fd があれば速い）、default ブランチ。
   { src = gh("folke/snacks.nvim") },
+
+  -- 編集 QoL。auto-pairs と surround。mini モノレポではなく standalone 2 つを
+  -- 個別に取る（1 プラグイン 1 役）。いずれも純 Lua・build 不要、default ブランチ。
+  { src = gh("echasnovski/mini.pairs") },
+  { src = gh("echasnovski/mini.surround") },
 })
 
 -- ── プラグイン管理 keymap（<leader>p 名前空間）───────────
@@ -64,3 +69,5 @@ require("config.git")
 require("config.snacks")
 require("config.finder")
 require("config.explorer")
+-- 編集 QoL（mini.pairs / mini.surround）。s=surround グループ名は ui.lua 側で登録済み。
+require("config.editing")

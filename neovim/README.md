@@ -21,7 +21,8 @@ neovim/
         ├── git.lua              gitsigns（git 統合）の設定
         ├── snacks.lua           snacks.nvim の中央 setup（picker + explorer）
         ├── finder.lua           snacks.picker（fuzzy finder）のキーマップ
-        └── explorer.lua         snacks.explorer（ファイラ）のキーマップ
+        ├── explorer.lua         snacks.explorer（ファイラ）のキーマップ
+        └── editing.lua          編集 QoL（mini.pairs / mini.surround）
 ```
 
 設定は「`plugins.lua` の `vim.pack.add` レジストリにプラグインを足す + 専用 config
@@ -150,6 +151,33 @@ require は pcall 保護で、未導入でも起動を壊さない。
   `<leader>f`=find のグループ名は `ui.lua` の which-key に登録（group 名は ui.lua、
   実キーマップは finder.lua という hunks と同じ分離）。LSP ナビ（`gd`/`grr` 等）の
   既定は置き換えていない。
+
+## 編集 QoL（auto-pairs・surround）
+
+括弧/クォートの自動補完と囲み操作は `echasnovski` の **mini.pairs** / **mini.surround**
+で行う。設定は `editing.lua` に集約。フル `mini.nvim` モノレポではなく **standalone の
+2リポジトリ**を個別に `vim.pack.add`（1プラグイン1役）。純 Lua・**build 不要**・依存なし、
+`version` は省略して default ブランチ。各 `setup` は独立に pcall 保護し、片方未導入でも
+他方と起動を壊さない。
+
+- **mini.pairs（auto-pairs）**: インサートで `( [ { " ' \`` を入力すると閉じ側を自動補完。
+  `<BS>` でペアの両側を削除、`<CR>` でペア間に改行＋インデント。**補完（blink.cmp）と
+  非競合**: blink の `default` preset は `<CR>` を確定に使わない（確定は `<C-y>`）。
+  treesitter 非依存の素朴な実装で、文字列/コメント内でもペアを足す点は割り切り。
+- **mini.surround（囲み操作）**: `s` プレフィックスの既定マッピング。
+
+  | キー | 機能 | 例 |
+  |------|------|----|
+  | `sa` | 追加（add） | `saiw"` → 単語を `"` で囲む |
+  | `sd` | 削除（delete） | `sd"` → 囲みの `"` を外す |
+  | `sr` | 置換（replace） | `sr"'` → `"` を `'` に変える |
+  | `sf` / `sF` | 検索（右/左） | |
+  | `sh` | ハイライト | |
+
+  `s`=surround のグループ名は `ui.lua` の which-key に登録（group 名は ui.lua、実マッピングは
+  mini.surround 既定）。組み込みの `s`（=`cl`、1文字置換）は `timeoutlen` 後にフォールバック
+  するため完全には失わない。別プレフィックスへ寄せたい場合は `editing.lua` の
+  `mini.surround` setup に `mappings` を渡す。
 
 ## Explorer（ファイラ）
 

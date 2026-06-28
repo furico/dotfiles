@@ -35,5 +35,6 @@ if ok_wk then
     { "<leader>p", group = "plugins" },
     { "<leader>h", group = "hunks" },
     { "<leader>f", group = "find" },
+    { "s", group = "surround" },
   })
 end
