@@ -3,9 +3,7 @@
 ## Purpose
 
 見た目と操作性（UI/QoL）の層を定義する。colorscheme（`catppuccin/nvim`、flavour=mocha）、statusline（`lualine.nvim`、`theme="auto"` で配色追従、`showmode=false`）、インデント縦ガイド（`indent-blankline.nvim` v3 = `ibl`）、キーマップポップアップ（`which-key.nvim`、`<leader>` グループ登録）を含む。設定は専用モジュール `lua/config/ui.lua` に分離し、`plugins.lua` の `vim.pack.add` レジストリに登録する。配色は当初 `neovim-plugins` の検証用 colorscheme 要件で扱っていたが、本 capability へ移管した。いずれも純 Lua で build 不要、未導入でも起動を壊さない。
-
 ## Requirements
-
 ### Requirement: UI プラグインの導入
 
 UI レイヤとして `catppuccin/nvim` / `lualine.nvim` / `indent-blankline.nvim` / `which-key.nvim` を `vim.pack` で導入しなければならない（MUST）。登録は `neovim-plugins` の宣言レジストリ（`plugins.lua` の `vim.pack.add`）に追加する。いずれも純 Lua で build フックは不要であり、`version` は省略して default ブランチを用いてよい。検証用に入っていた tokyonight は registry から外す（MUST）。
@@ -74,7 +72,7 @@ UI の設定は専用モジュール `lua/config/ui.lua` に置き、`lua/config
 
 ### Requirement: which-key とグループ登録
 
-`which-key.nvim` を setup し、キー押下途中に割当てをポップアップ表示しなければならない（MUST）。`<leader>` 名前空間のグループ名（少なくとも `<leader>p`=plugins、`<leader>h`=hunks）を登録する。既存マッピングの `desc` をそのまま説明として用い、`keymaps.lua` は plugin-free に保つ。
+`which-key.nvim` を setup し、キー押下途中に割当てをポップアップ表示しなければならない（MUST）。`<leader>` 名前空間のグループ名（少なくとも `<leader>p`=plugins、`<leader>h`=hunks、`<leader>f`=find）を登録する。group 名は `ui.lua` の `wk.add` に集約し、各 capability の実キーマップ（hunks は git.lua、find は finder.lua）とは分離する。既存マッピングの `desc` をそのまま説明として用い、`keymaps.lua` は plugin-free に保つ。
 
 #### Scenario: ポップアップが出る
 
@@ -83,8 +81,8 @@ UI の設定は専用モジュール `lua/config/ui.lua` に置き、`lua/config
 
 #### Scenario: グループ名が付く
 
-- **WHEN** which-key のポップアップで `<leader>p` / `<leader>h` を確認する
-- **THEN** それぞれ plugins / hunks のグループ名が表示される
+- **WHEN** which-key のポップアップで `<leader>p` / `<leader>h` / `<leader>f` を確認する
+- **THEN** それぞれ plugins / hunks / find のグループ名が表示される
 
 ### Requirement: スコープ外項目の非導入
 
@@ -95,3 +93,4 @@ UI の設定は専用モジュール `lua/config/ui.lua` に置き、`lua/config
 - **WHEN** 本 capability の成果物を確認する
 - **THEN** ファイラ（oil/neo-tree）・bufferline/tabline・dashboard・通知（nvim-notify 等）は含まれない
 - **AND** snacks 等の大型 QoL バンドルは含まれない
+

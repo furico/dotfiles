@@ -34,5 +34,6 @@ if ok_wk then
   wk.add({
     { "<leader>p", group = "plugins" },
     { "<leader>h", group = "hunks" },
+    { "<leader>f", group = "find" },
   })
 end

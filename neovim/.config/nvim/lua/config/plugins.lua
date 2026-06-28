@@ -36,6 +36,10 @@ vim.pack.add({
   { src = gh("folke/which-key.nvim") },
   { src = gh("lewis6991/gitsigns.nvim") },
   { src = gh("lukas-reineke/indent-blankline.nvim") },
+
+  -- fuzzy finder。snacks の picker モジュールのみを finder.lua で有効化する。
+  -- 純 Lua・build 不要・外部バイナリ不要（rg/fd があれば速い）、default ブランチ。
+  { src = gh("folke/snacks.nvim") },
 })
 
 -- ── プラグイン管理 keymap（<leader>p 名前空間）───────────
@@ -54,3 +58,5 @@ require("config.lsp")
 -- UI（colorscheme/statusline/インデント/which-key）→ git（gitsigns）。
 require("config.ui")
 require("config.git")
+-- fuzzy finder（snacks.picker）。<leader>f グループ名は ui.lua 側で登録済み。
+require("config.finder")
