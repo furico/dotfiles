@@ -8,7 +8,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="bureau"
+# プロンプトは starship が描画するため oh-my-zsh のテーマは無効化する（空文字）。
+ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,7 +71,8 @@ ZSH_THEME="bureau"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf z)
+# z は zoxide に置き換えたため外す（zoxide は .zshrc 下部で init する）。
+plugins=(git fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,5 +107,49 @@ source $ZSH/oh-my-zsh.sh
 # tmux 外のシェルで C-q を使いたい場合（readline の quoted-insert など）に必要。
 stty -ixon
 
+# ── Homebrew 製 zsh ツールの読み込み ──────────────────────────────────────
+# Brewfile で導入したものを source / init する。brew --prefix は起動のたびに呼ぶと
+# 遅いため 1 回だけ評価してキャッシュ。各読み込みは未インストールでも壊れないよう
+# 存在確認する。
+if command -v brew >/dev/null 2>&1; then
+  BREW_PREFIX="$(brew --prefix)"
+
+  # 履歴からのゴースト補完（→ / C-e で確定）。
+  [ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] \
+    && source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
+# ── 履歴設定 ──────────────────────────────────────────────────────────────
+# 履歴を十分に確保し、重複を除去、複数シェル間で共有する。
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY        # セッション間で履歴を即共有する
+setopt HIST_IGNORE_ALL_DUPS # 重複コマンドは古い方を捨てる
+setopt HIST_IGNORE_SPACE    # 先頭スペース付きコマンドは記録しない
+setopt HIST_REDUCE_BLANKS   # 余分な空白を圧縮して記録する
+
+# ── zoxide（賢い cd。z プラグインの後継）──────────────────────────────────
+# z <部分一致> でジャンプ、zi で fzf 対話選択。
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+
+# ── starship プロンプト ───────────────────────────────────────────────────
+# 設定は ~/.config/starship.toml（starship パッケージを stow で配置）。
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
+
+# ── モダン CLI のエイリアス ───────────────────────────────────────────────
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --group-directories-first'
+  alias ll='eza -l --git --group-directories-first'
+  alias la='eza -la --git --group-directories-first'
+  alias lt='eza --tree --level=2'
+fi
+command -v bat >/dev/null 2>&1 && alias cat='bat'
+
 # Machine-specific settings (not tracked in dotfiles)
 [ -f "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
+
+# ── zsh-syntax-highlighting（必ず最後に読み込む）──────────────────────────
+# 行編集に関わる他の設定（補完・widget 等）をすべて読み込んだ後でないと正しく
+# 動かないため、.zshrc.local も含めた最終行に置く。
+[ -n "$BREW_PREFIX" ] && [ -f "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] \
+  && source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

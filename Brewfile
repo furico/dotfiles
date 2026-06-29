@@ -28,6 +28,14 @@ brew "gh"        # GitHub CLI。
 brew "ghq"       # リポジトリのクローン/管理。
 brew "lazygit"   # tmux の prefix+C-g ポップアップから起動する TUI。
 
+# ── zsh 体験向上（zsh/.zshrc が source / init する前提）──────────
+brew "starship"                # プロンプト。ZSH_THEME を無効化し starship が描画する。
+brew "zsh-autosuggestions"     # 履歴からのゴースト補完（→ / C-e で確定）。
+brew "zsh-syntax-highlighting" # 入力中のコマンド正誤を色分け。.zshrc 末尾で source。
+brew "zoxide"                  # 賢い cd。oh-my-zsh の z プラグインを置き換える。
+brew "eza"                     # ls の後継。ls/ll/la/lt エイリアスの実体。
+brew "bat"                     # cat の後継（シンタックスハイライト）。cat エイリアスの実体。
+
 # ── ビューア / 補助ユーティリティ ────────────────────────────────
 brew "glow"            # Markdown を端末で閲覧。
 brew "tree"            # ディレクトリ構造の確認。
