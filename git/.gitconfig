@@ -1,0 +1,55 @@
+[user]
+	email = 798293+furico@users.noreply.github.com
+	name = furi
+
+# ── 差分表示は delta が描画する（brew "git-delta" が前提）─────────
+# core.pager: git diff / show / log の出力を delta に通す。
+# interactive.diffFilter: git add -p などの対話 hunk も delta 化。
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	features = catppuccin-mocha  # 下で定義する配色（ghostty と統一）
+	navigate = true              # n / N で次・前のファイルへジャンプ
+	line-numbers = true          # 旧→新の行番号を 2 列表示
+	side-by-side = false         # 端末幅次第で true にすると左右分割
+
+# Catppuccin Mocha 配色（bat の同名テーマと揃う）。
+# 出典: catppuccin/delta のテーマ定義。
+[delta "catppuccin-mocha"]
+	dark = true
+	syntax-theme = Catppuccin Mocha
+	blame-palette = "#1e1e2e #181825 #11111b #313244 #45475a"
+	commit-decoration-style = box ul
+	file-decoration-style = "#cdd6f4"
+	file-style = "#cdd6f4"
+	hunk-header-decoration-style = box ul
+	hunk-header-file-style = bold
+	hunk-header-line-number-style = bold "#a6adc8"
+	hunk-header-style = file line-number syntax
+	line-numbers-left-style = "#6c7086"
+	line-numbers-minus-style = "#f38ba8"
+	line-numbers-plus-style = "#a6e3a1"
+	line-numbers-right-style = "#6c7086"
+	line-numbers-zero-style = "#6c7086"
+	minus-emph-style = syntax "#53394c"
+	minus-style = syntax "#37222c"
+	plus-emph-style = syntax "#404f4a"
+	plus-style = syntax "#2c3729"
+
+# 移動した行を別色で表示（コードの移動 vs 変更が一目で分かる）。
+[diff]
+	colorMoved = default
+
+# コンフリクト時に「共通の祖先」も表示する 3-way 表示（git >= 2.35）。
+[merge]
+	conflictstyle = zdiff3
+
+# 必要なときだけ delta を左右分割（side-by-side）で開くエイリアス。
+# 通常は縦並び、`git sdiff` / `git sshow` で横並びに切り替わる。
+[alias]
+	sdiff = "!git -c delta.side-by-side=true diff"
+	sshow = "!git -c delta.side-by-side=true show"

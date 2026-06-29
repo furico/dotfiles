@@ -27,6 +27,7 @@ brew "fzf"      # zsh プラグイン（plugins=(... fzf)）の曖昧検索。
 brew "gh"        # GitHub CLI。
 brew "ghq"       # リポジトリのクローン/管理。
 brew "lazygit"   # tmux の prefix+C-g ポップアップから起動する TUI。
+brew "git-delta" # git diff/show/log の差分を彩色する pager（git/.gitconfig が前提）。
 
 # ── zsh 体験向上（zsh/.zshrc が source / init する前提）──────────
 brew "starship"                # プロンプト。ZSH_THEME を無効化し starship が描画する。
