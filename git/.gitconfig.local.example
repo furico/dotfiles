@@ -1,0 +1,12 @@
+# ~/.gitconfig.local — マシン固有のユーザー識別情報（リポジトリ管理対象外）
+#
+# このファイルを ~/.gitconfig.local にコピーして自分の値を記入する:
+#   cp git/.gitconfig.local.example ~/.gitconfig.local
+#
+# email には GitHub の noreply アドレスを推奨。実メールを公開せずに
+# コミットを GitHub アカウントへ帰属できる。値は GitHub の
+# Settings → Emails → "Keep my email addresses private" で確認できる
+# （形式: <ID>+<username>@users.noreply.github.com）。
+[user]
+	email = 0000000+username@users.noreply.github.com
+	name = Your Name

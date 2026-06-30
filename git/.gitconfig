@@ -1,6 +1,10 @@
-[user]
-	email = 798293+furico@users.noreply.github.com
-	name = furi
+# ── ユーザー識別情報はマシン固有の ~/.gitconfig.local に分離する ─────
+# email / name はこのリポジトリに含めない（public 化時の個人情報露出を防ぐ）。
+# 初回セットアップ時に git/.gitconfig.local.example を ~/.gitconfig.local に
+# コピーして自分の値を記入する。GitHub の noreply メールを使えば実アドレスを
+# 公開せずにコミットを GitHub アカウントへ正しく帰属できる。
+[include]
+	path = ~/.gitconfig.local
 
 # ── 差分表示は delta が描画する（brew "git-delta" が前提）─────────
 # core.pager: git diff / show / log の出力を delta に通す。
