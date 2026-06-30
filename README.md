@@ -33,7 +33,7 @@ cd ~/dotfiles
 brew bundle install --file=~/dotfiles/Brewfile
 
 # 3. 管理したいパッケージを個別に stow する
-stow zsh neovim tmux vim ghostty
+stow zsh neovim tmux vim ghostty git starship
 ```
 
 ### Brewfile
@@ -55,6 +55,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # TPM（tmux プラグイン管理）。clone 後、tmux 内で prefix + I を実行して取得する
 git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
+
+# git ユーザー識別情報（email/name はリポジトリに含めない）。コピー後に自分の値を記入する。
+# email は GitHub の noreply アドレス推奨（実メールを公開せずコミットを帰属できる）。
+cp ~/dotfiles/git/.gitconfig.local.example ~/.gitconfig.local
 ```
 
 - **ghostty** … 端末エミュレータ。手動インストール（cask 管理しない）。
@@ -69,6 +73,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 | `tmux` | `~/.config/tmux/` |
 | `vim` | `~/.vimrc` |
 | `ghostty` | `~/.config/ghostty/config` |
+| `git` | `~/.gitconfig`（+ マシン固有の `~/.gitconfig.local`） |
+| `starship` | `~/.config/starship.toml` |
 
 ## 新しいアプリを追加する
 
