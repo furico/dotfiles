@@ -69,5 +69,7 @@ require("config.git")
 require("config.snacks")
 require("config.finder")
 require("config.explorer")
+-- lazygit 連携（snacks の lazygit モジュール）。<leader>g=git グループ名は ui.lua 側で登録済み。
+require("config.lazygit")
 -- 編集 QoL（mini.pairs / mini.surround）。s=surround グループ名は ui.lua 側で登録済み。
 require("config.editing")
