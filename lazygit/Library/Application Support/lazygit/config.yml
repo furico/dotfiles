@@ -1,0 +1,12 @@
+# ── lazygit の diff 表示も delta に通す ──────────────────────────
+# git/.gitconfig と同じ delta（brew "git-delta"）・同じ配色を再利用する。
+# delta は ~/.gitconfig の [delta "catppuccin-mocha"] を読むため、
+# ここでは features 名を渡すだけで ghostty / bat と揃った配色になる。
+git:
+  pagers:
+    - # delta は独自に色付けするので lazygit 側の色付けは無効化し、
+      # 常にカラー出力を要求する。
+      colorArg: always
+      # --paging=never: lazygit のパネル内で delta が less を起動しないように。
+      # --features: ~/.gitconfig で定義した Catppuccin Mocha 配色を流用。
+      pager: delta --features=catppuccin-mocha --paging=never

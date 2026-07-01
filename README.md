@@ -33,7 +33,7 @@ cd ~/dotfiles
 brew bundle install --file=~/dotfiles/Brewfile
 
 # 3. 管理したいパッケージを個別に stow する
-stow zsh neovim tmux vim ghostty git starship
+stow zsh neovim tmux vim ghostty git starship lazygit
 ```
 
 ### Brewfile
@@ -75,6 +75,7 @@ cp ~/dotfiles/git/.gitconfig.local.example ~/.gitconfig.local
 | `ghostty` | `~/.config/ghostty/config` |
 | `git` | `~/.gitconfig`（+ マシン固有の `~/.gitconfig.local`） |
 | `starship` | `~/.config/starship.toml` |
+| `lazygit` | `~/Library/Application Support/lazygit/config.yml`（diff を delta 表示） |
 
 ## 新しいアプリを追加する
 
