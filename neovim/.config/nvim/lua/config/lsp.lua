@@ -25,11 +25,46 @@ end
 
 vim.lsp.config("*", { capabilities = blink_capabilities() })
 
+-- ── Python venv 検出（basedpyright）─────────────────────
+-- 新規プラグインは足さず、before_init で pythonPath を解決するだけに留める。
+-- 優先順位: $VIRTUAL_ENV → root_dir/.venv → root_dir/venv → 何もしない（PATH の python3 に委ねる）。
+local function find_venv_python(root_dir)
+  local venv = os.getenv("VIRTUAL_ENV")
+  if venv and vim.uv.fs_stat(venv .. "/bin/python") then
+    return venv .. "/bin/python"
+  end
+  if not root_dir then
+    return nil
+  end
+  for _, dir in ipairs({ ".venv", "venv" }) do
+    local python = root_dir .. "/" .. dir .. "/bin/python"
+    if vim.uv.fs_stat(python) then
+      return python
+    end
+  end
+  return nil
+end
+
+vim.lsp.config("basedpyright", {
+  -- client.settings は Client.create 時に config.settings への参照として束縛される
+  -- （vim.lsp.client 実装で確認済み）。ここで config.settings を丸ごと再代入すると
+  -- client.settings は古い参照のまま取り残され、workspace/configuration 応答に
+  -- pythonPath が乗らない。既存テーブルへの破壊的代入で参照を保つ。
+  before_init = function(_, config)
+    local python_path = find_venv_python(config.root_dir)
+    if python_path then
+      config.settings = config.settings or {}
+      config.settings.python = config.settings.python or {}
+      config.settings.python.pythonPath = python_path
+    end
+  end,
+})
+
 -- ── サーバの調達リストと自動有効化 ───────────────────────
 -- 追加はこの ensure_installed の1リストに足すだけ（lspconfig サーバ名）。
 pcall(function()
   require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "bashls", "jsonls", "yamlls", "taplo" },
+    ensure_installed = { "lua_ls", "bashls", "jsonls", "yamlls", "taplo", "basedpyright" },
     automatic_enable = true,
   })
 end)
